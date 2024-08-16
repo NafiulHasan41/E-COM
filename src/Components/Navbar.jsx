@@ -77,11 +77,11 @@ const Navbar = () => {
                               <div>
                                   {user ? (
                                   <button onClick={handleLogOut}
-                                      className="flex items-center gap-2 p-1 md:p-2 rounded-[6px] font-semibold bg-red-400  hover:bg-cyan-700  lg:text-xl   border-none text-black">
+                                      className="flex items-center gap-2 p-1 md:p-2 rounded-[6px] font-semibold text-red-400  hover:bg-cyan-700  lg:text-xl   border-none ">
                                       Logout <TbLogout2 />
                                   </button>
                                   ) : (
-                                  <Link to="/login" className=" flex items-center gap-2 p-1 md:p-2 rounded-[6px] font-semibold bg-green-200 hover:bg-cyan-700  border-none text-black">
+                                  <Link to="/login" className=" flex items-center gap-2 p-1 md:p-2 rounded-[6px] font-semibold text-green-500 lg:text-xl  hover:bg-cyan-700  border-none ">
                                   Login <IoLogInOutline />
                                   </Link>
                                   )}
