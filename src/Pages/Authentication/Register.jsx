@@ -186,9 +186,9 @@ const Register = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
       <Helmet>
-        <title>TherapyNest: Create Account</title>
+        <title>E-COM : Create Account</title>
       </Helmet>
-      <div className="flex flex-col-reverse lg:flex-row items-center w-full lg:w-3/4">
+      <div className="flex flex-col-reverse lg:flex-row-reverse items-center w-full lg:w-3/4">
         <div className="w-full lg:w-1/2 flex flex-col items-center justify-center p-4">
           <img
             className="w-28 mb-8"
@@ -199,9 +199,9 @@ const Register = () => {
             Sign In To Your Account
           </h1>
           <p className="text-[#5C635A] text-center text-sm mb-8">
-            Welcome Back! By clicking the sign up button, you&apos;re agreeing to TherapyNest&apos;s
+            Welcome Back! By clicking the sign up button, you&apos;re agreeing to E-COM&apos;S
             Terms and Services and acknowledge the{" "}
-            <Link to="/privacy_and_policy" className="text-[#156BCA] font-medium">
+            <Link className="text-[#156BCA] font-medium">
               Privacy and Policy
             </Link>
           </p>

@@ -126,7 +126,7 @@ const Login = () => {
               <input type="checkbox" className="checkbox" />
               <p className="text-[#5C635A] text-sm">Remember me</p>
             </div>
-            <Link className="text-[#156BCA] text-sm font-medium" to="/forgot-password">
+            <Link className="text-[#156BCA] text-sm font-medium">
               Forgot Password?
             </Link>
           </div>
@@ -165,7 +165,7 @@ const Login = () => {
             <h1 className="text-white text-xl font-semibold">
               <span className="text-[#156BCA]">Sign In </span> to view all the
             </h1>
-            <h1 className="text-white text-xl font-semibold">massage therapists</h1>
+            <h1 className="text-white text-xl font-semibold">E-COM Product&apos;s</h1>
           </div>
         </div>
       </div>
