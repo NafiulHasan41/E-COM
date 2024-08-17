@@ -29,7 +29,7 @@ const Navbar = () => {
               .then(() => {
                 setLoading(false);
                 Swal.fire("User Logged out Successfully");
-                navigate("/login");
+                navigate("/");
                 
               })
               .catch((error) => {

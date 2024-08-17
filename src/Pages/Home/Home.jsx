@@ -185,7 +185,7 @@ const handleInput = (e) => {
               try {
                
                   const { data } = await axios.get(
-                      `http://localhost:4000/products?search=${search}&minPrice=${minValue}&maxPrice=${maxValue}&category=${category}&brand=${brand}&sort=${sort}&page=${currentPage}&limit=${itemsPerPage}`);
+                      `https://e-com-server-two.vercel.app/products?search=${search}&minPrice=${minValue}&maxPrice=${maxValue}&category=${category}&brand=${brand}&sort=${sort}&page=${currentPage}&limit=${itemsPerPage}`);
   
                       setProducts(data);
                     
@@ -209,7 +209,7 @@ const handleInput = (e) => {
             try {
            
                 const { data } = await axios.get(
-                    `http://localhost:4000/products_count?search=${search}&minPrice=${minValue}&maxPrice=${maxValue}&category=${category}&brand=${brand}`);
+                    `https://e-com-server-two.vercel.app/products_count?search=${search}&minPrice=${minValue}&maxPrice=${maxValue}&category=${category}&brand=${brand}`);
                 setCount(data.count);
                 
             }
@@ -237,7 +237,7 @@ const handleInput = (e) => {
 
 
     return (
-        <div className=""> 
+        <div className=" md:h-[2000px] lg:h-[1200px] bg-[#F2F4F8]"> 
         <Helmet>
         <title>E-COM : Home</title>
       </Helmet>
