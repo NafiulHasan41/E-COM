@@ -2,7 +2,7 @@
 
 const Footer = () => {
     return (
-        <footer className="footer bg-neutral text-neutral-content p-10">
+        <footer className="footer bg-neutral text-neutral-content p-10 mt-8">
         <aside>
           <img className=" w-24 h-24" src="/e-com-removebg-preview.png" alt="website_logo" />
           <p>

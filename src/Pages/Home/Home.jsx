@@ -6,38 +6,15 @@ import { HiMenuAlt3 } from "react-icons/hi";
 import { ImCancelCircle } from "react-icons/im";
 import ProductCard from "../../Components/ProductCard";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { FaL } from "react-icons/fa6";
 
 
 
 const Home = () => {
 
 
-    // getting data from api 
-
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-    // getting data
-     useEffect(() => {
-
-        const getData = async () => {
-            try {
-                setLoading(true);
-                const { data } = await axios.get(
-                    `http://localhost:4000/products`);
-
-                    setProducts(data);
-                    setLoading(false)
-                    console.log(data);
-                    
-            }
-            catch (error) {
-                console.log(error)}
-                setLoading(false);
-        }
-        getData();
-
-     },[]);
+  
     
 
 
@@ -113,15 +90,6 @@ const handleInput = (e) => {
 
 
 
-      //  handle pagination button
-
-      const numberOfPages = Math.ceil(count / itemsPerPage)
-  const pages = [...Array(numberOfPages).keys()].map(element => element + 1)
-
-  const handlePaginationButton = value => {
-   
-    setCurrentPage(value)
-  }
 
 
 
@@ -202,14 +170,73 @@ const handleInput = (e) => {
         </>
     }
 
+ 
+
+      // getting data from api 
+
+      const [products, setProducts] = useState([]);
+      const [loading, setLoading] = useState(false);
+  
+      // getting data
+       useEffect(() => {
+  
+          const getData = async () => {
+              try {
+                  setLoading(true);
+                  const { data } = await axios.get(
+                      `http://localhost:4000/products?search=${search}&minPrice=${minValue}&maxPrice=${maxValue}&category=${category}&brand=${brand}&sort=${sort}&page=${currentPage}&limit=${itemsPerPage}`);
+  
+                      setProducts(data);
+                      setLoading(false)
+                     
+                      
+              }
+              catch (error) {
+               
+                  Swal.fire(error.message)
+                  setLoading(false);
+              }
+          }
+          getData();
+  
+       },[search, minValue, maxValue, category, brand, sort, currentPage, itemsPerPage]);
+
+    //    getting pagination size
+     
+      useEffect(() => {
+        const getCount = async () => {
+            try {
+                setLoading(true);
+                const { data } = await axios.get(
+                    `http://localhost:4000/products_count?search=${search}&minPrice=${minValue}&maxPrice=${maxValue}&category=${category}&brand=${brand}`);
+                setCount(data.count);
+                setLoading(false);
+            }
+            catch (error) {
+                Swal.fire(error.message)
+                setLoading(false);
+            }
+        }
+        getCount();
+      });
 
 
 
 
+          //  handle pagination button
+
+          const numberOfPages = Math.ceil(count / itemsPerPage)
+          const pages = [...Array(numberOfPages).keys()].map(element => element + 1)
+        
+          const handlePaginationButton = value => {
+           
+            setCurrentPage(value)
+          }
+        
 
 
     return (
-        <div>
+        <div className=""> 
         <Helmet>
         <title>E-COM : Home</title>
       </Helmet>
@@ -266,7 +293,8 @@ const handleInput = (e) => {
            {/* for shoe all cart showing */}
            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
 
-               {
+               { 
+                
                 // showing cards
                 products.map(product => (
                     <ProductCard key={product._id} product={product} />

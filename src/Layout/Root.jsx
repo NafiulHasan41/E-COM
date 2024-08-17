@@ -8,10 +8,13 @@ const Root = () => {
     return (
       <div> 
         <Navbar/>
-        <div className=" min-h-screen">
+        <div className=" min-h-screen md:h-[900px] overflow-y-auto  ">
         <Outlet/>
         </div>
-        <Footer/>    
+        <div className=" ">
+        <Footer />    
+        </div>
+    
         
 
       </div>
