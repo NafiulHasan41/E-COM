@@ -48,7 +48,34 @@ Make sure you have the following installed on your machine:
 
 To create a production build of the application, run:
 
-```sh
-npm run build
-# or
-yarn build
+    ```sh
+    npm run build
+    # or
+    yarn build
+    ```
+
+## Features
+
+- **Product Search**: Users can search for products using a search bar.
+- **Responsive Design**: The application is fully responsive and works on all device sizes.
+- **Product Details**: View detailed information about each product.
+- **Add to Cart**: Users can add products to their shopping cart.
+- **Checkout**: A simple checkout process to complete the purchase.
+- **User Authentication**: Secure user authentication and authorization.
+- **Admin Panel**: Admin interface for managing products and orders.
+
+## Technologies Used
+
+- **React**: JavaScript library for building user interfaces.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **React Router**: For routing and navigation.
+- **Redux**: State management library.
+- **Firebase**: Backend services for authentication and database.
+
+## Contributing
+
+If you would like to contribute to this project, please fork the repository and submit a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
