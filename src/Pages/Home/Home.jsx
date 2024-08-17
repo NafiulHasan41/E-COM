@@ -1,11 +1,49 @@
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import MultiRangeSlider from "multi-range-slider-react";
+import { HiMenuAlt3 } from "react-icons/hi";
+import { ImCancelCircle } from "react-icons/im";
 
 
 
 const Home = () => {
+
+
+    // for mobile and tablet filter 
+    const [dropDown, setDropDown] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropDown(false);
+            }
+        };
+
+        if (dropDown) {
+            document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('touchstart', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside);
+        };
+    }, [dropDown]);
+
+
+
+
+
+
+
+
+
+
     
     // for pagination
     const [itemsPerPage, setItemsPerPage] = useState(9);
@@ -159,10 +197,13 @@ const handleInput = (e) => {
 
            {/* sorting div */}
            <div className=" flex justify-between lg:justify-end bg-white rounded-xl m-2 lg:m-3">
-              <div className=" block lg:hidden p-2">
-                Filter
+                 
+              <div onClick={() => setDropDown(true)} className="  lg:hidden p-2 flex items-center">
+                Filter <div  className="h-7 w-7 md:h-10 md:w-10  flex items-center justify-center">
+                        <HiMenuAlt3 />
+                    </div>
               </div>
-            <div className=" md:font-semibold p-2 flex gap-2"> Sort By:  <select onChange={e=> {
+            <div className=" md:font-semibold p-2 flex gap-2 items-center"> Sort By:  <select onChange={e=> {
                                             setSort(e.target.value)
                                             setCurrentPage(1)
                                             }}
@@ -181,8 +222,24 @@ const handleInput = (e) => {
            </div>
 
           </div>
+
+          <>
+                {dropDown && (
+                    <div ref={dropdownRef} className="fixed top-0 right-0 z-40">
+                        <div className="relative">
+                            <div className="absolute top-0 right-0 overflow-y-auto h-screen bg-white pt-10">
+                                {customSidebar()}
+                                <div onClick={() => setDropDown(false)} className="absolute top-5 right-5 z-50">
+                                    <ImCancelCircle className="w-5 h-5" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </>
             
         </div>
+        
     );
 };
 
