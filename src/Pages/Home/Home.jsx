@@ -5,10 +5,40 @@ import MultiRangeSlider from "multi-range-slider-react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { ImCancelCircle } from "react-icons/im";
 import ProductCard from "../../Components/ProductCard";
+import axios from "axios";
 
 
 
 const Home = () => {
+
+
+    // getting data from api 
+
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    // getting data
+     useEffect(() => {
+
+        const getData = async () => {
+            try {
+                setLoading(true);
+                const { data } = await axios.get(
+                    `http://localhost:4000/products`);
+
+                    setProducts(data);
+                    setLoading(false)
+                    console.log(data);
+                    
+            }
+            catch (error) {
+                console.log(error)}
+                setLoading(false);
+        }
+        getData();
+
+     },[]);
+    
 
 
     // for mobile and tablet filter 
@@ -238,9 +268,12 @@ const handleInput = (e) => {
 
                {
                 // showing cards
+                products.map(product => (
+                    <ProductCard key={product._id} product={product} />
+                ))
                 
                }
-               <ProductCard/>
+               
 
            </div>
 
