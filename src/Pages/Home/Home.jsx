@@ -7,7 +7,7 @@ import { ImCancelCircle } from "react-icons/im";
 import ProductCard from "../../Components/ProductCard";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { FaL } from "react-icons/fa6";
+
 
 
 
@@ -53,7 +53,8 @@ const Home = () => {
 
 
  // for pagination
-    const [itemsPerPage, setItemsPerPage] = useState(9);
+    
+    const itemsPerPage = 9;
     const [currentPage, setCurrentPage] = useState(1);
    const [count, setCount] = useState(0);
 
@@ -175,26 +176,26 @@ const handleInput = (e) => {
       // getting data from api 
 
       const [products, setProducts] = useState([]);
-      const [loading, setLoading] = useState(false);
+     
   
       // getting data
        useEffect(() => {
   
           const getData = async () => {
               try {
-                  setLoading(true);
+               
                   const { data } = await axios.get(
                       `http://localhost:4000/products?search=${search}&minPrice=${minValue}&maxPrice=${maxValue}&category=${category}&brand=${brand}&sort=${sort}&page=${currentPage}&limit=${itemsPerPage}`);
   
                       setProducts(data);
-                      setLoading(false)
+                    
                      
                       
               }
               catch (error) {
                
                   Swal.fire(error.message)
-                  setLoading(false);
+                 
               }
           }
           getData();
@@ -206,15 +207,15 @@ const handleInput = (e) => {
       useEffect(() => {
         const getCount = async () => {
             try {
-                setLoading(true);
+           
                 const { data } = await axios.get(
                     `http://localhost:4000/products_count?search=${search}&minPrice=${minValue}&maxPrice=${maxValue}&category=${category}&brand=${brand}`);
                 setCount(data.count);
-                setLoading(false);
+                
             }
             catch (error) {
                 Swal.fire(error.message)
-                setLoading(false);
+                
             }
         }
         getCount();
@@ -296,9 +297,9 @@ const handleInput = (e) => {
                { 
                 
                 // showing cards
-                products.map(product => (
-                    <ProductCard key={product._id} product={product} />
-                ))
+                 products.map(product => (
+                <ProductCard key={product._id} product={product} />
+            ))
                 
                }
                
