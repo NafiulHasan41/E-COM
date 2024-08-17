@@ -1,6 +1,8 @@
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import MultiRangeSlider from "multi-range-slider-react";
+
 
 
 const Home = () => {
@@ -9,6 +11,25 @@ const Home = () => {
     const [itemsPerPage, setItemsPerPage] = useState(9);
     const [currentPage, setCurrentPage] = useState(1);
    const [count, setCount] = useState(0);
+
+//     for search
+const [search, setSearch] = useState('');
+const [searchText, setSearchText] = useState('');
+
+const handleSearch = e => {
+    e.preventDefault()
+
+    setSearch(searchText)
+  }
+
+//   price range 
+
+const [minValue, set_minValue] = useState(0);
+const [maxValue, set_maxValue] = useState(10000);
+const handleInput = (e) => {
+	set_minValue(e.minValue);
+	set_maxValue(e.maxValue);
+};
 
 
 
@@ -31,6 +52,27 @@ const Home = () => {
            {/* whole sidebar */}
 
            <div className=" w-[200px] mx-auto  p-2 space-y-3">
+
+            {/* Price range */}
+            <div>
+            <span className="text-black font-semibold">Price Range</span>
+            <MultiRangeSlider
+			min={0}
+			max={10000}
+			step={1}
+			ruler={false}
+			label={true}
+			preventWheel={false}
+			minValue={minValue}
+			maxValue={maxValue}
+			onInput={(e) => {
+				handleInput(e);
+			}}
+		/>
+            </div>
+
+
+
             {/* Category Name */}
             <div className=" text-white border-b-2 pb-2 border-black ">
                                         {/* if problem happen for this class in MUI then I will change it */}
@@ -94,10 +136,12 @@ const Home = () => {
 
           <div className=" flex flex-col lg:flex-row lg:gap-2 h-screen bg-[#F2F4F8]" >
 
-          <div className=" hidden lg:block w-full  lg:w-[400px] bg-white ">
+          <div className="  w-full  lg:w-[400px] bg-white ">
+          <form onSubmit={handleSearch}>
               <div className=" flex justify-center my-3">
       <label className="input input-bordered flex items-center w-[250px]  gap-2">
-          <input type="text" className="grow " placeholder="Search" />
+          <input   onChange={e=> setSearchText(e.target.value)}
+                                        value={searchText} type="text" className="grow " placeholder="Search" />
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
               className="h-4 w-4 opacity-70">
               <path fillRule="evenodd"
@@ -105,8 +149,9 @@ const Home = () => {
                   clipRule="evenodd" />
           </svg>
       </label>
-  </div>
-              <div>
+            </div>
+          </form>
+              <div className="hidden lg:block">
                 {customSidebar()}
               </div>
            </div >
